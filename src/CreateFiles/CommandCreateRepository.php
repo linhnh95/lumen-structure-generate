@@ -47,7 +47,6 @@ class CommandCreateRepository extends GeneratorCommand
     protected function replaceClass($stub, $name): string
     {
         $stub = parent::replaceClass($stub, $name);
-        $stub = $this->replaceTable($stub);
         return $stub;
     }
 
