@@ -68,7 +68,8 @@ class CommandCreateRequest extends GeneratorCommand
 
         foreach ($requests as $request) {
             $nameInput = $this->qualifyClass($director['folder'] . DIRECTORY_SEPARATOR . $request);
-            $path = $this->getPath($nameInput. DIRECTORY_SEPARATOR . $director['name']);
+            $namePath = $this->getDefaultNamespace($this->rootNamespace()) . DIRECTORY_SEPARATOR . $director['folder'] . DIRECTORY_SEPARATOR . $director['name'] . DIRECTORY_SEPARATOR . $request;
+            $path = $this->getPath($namePath);
             if ((!$this->hasOption('force') ||
                     !$this->option('force')) &&
                 $this->alreadyExists($request)) {

@@ -60,7 +60,8 @@ class CommandCreateCollection extends GeneratorCommand
         $nameBase = $this->qualifyClass($this->getNameInput());
         $nameInput = $this->getNameInput() . 'Collection';
         $name = $this->qualifyClass($nameInput);
-        $path = $this->getPath($name. DIRECTORY_SEPARATOR . $director['name']);
+        $namePath = $this->getDefaultNamespace($this->rootNamespace()) . DIRECTORY_SEPARATOR . $director['folder'] . DIRECTORY_SEPARATOR . $director['name'] . DIRECTORY_SEPARATOR . $name;
+        $path = $this->getPath($namePath);
         if ((!$this->hasOption('force') ||
                 !$this->option('force')) &&
             $this->alreadyExists($nameInput)) {
