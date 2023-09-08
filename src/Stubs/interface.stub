@@ -6,6 +6,8 @@ interface DummyClassInterface
 {
     public function get{{variable}}s(array $params = []);
 
+    public function get{{variable}}Pagination(array $params = []);
+
     public function find{{variable}}ById(int $id);
 
     public function create{{variable}}(array $create = []);

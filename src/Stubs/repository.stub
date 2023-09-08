@@ -11,6 +11,11 @@ class DummyClassRepository implements DummyClassInterface
 
     }
 
+    public function get{{variable}}Pagination(array $params = [])
+    {
+
+    }
+
     public function find{{variable}}ById(int $id)
     {
 
