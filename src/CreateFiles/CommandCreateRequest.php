@@ -69,7 +69,7 @@ class CommandCreateRequest extends GeneratorCommand
             $name = $this->qualifyClass($request);
             $nameInput = $director['folder'] . DIRECTORY_SEPARATOR . $name;
             $nameBase = $this->qualifyClass($nameInput);
-            $path = $this->getPath($name);
+            $path = $this->getPath($nameInput);
             if ((!$this->hasOption('force') ||
                     !$this->option('force')) &&
                 $this->alreadyExists($request)) {

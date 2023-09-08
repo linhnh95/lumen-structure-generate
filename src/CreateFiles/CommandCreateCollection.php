@@ -56,7 +56,7 @@ class CommandCreateCollection extends GeneratorCommand
     public function handle()
     {
         $nameBase = $this->qualifyClass($this->getNameInput());
-        $nameInput = $this->getNameInput() . 'Resource';
+        $nameInput = $this->getNameInput() . 'Collection';
         $name = $this->qualifyClass($nameInput);
         $path = $this->getPath($name);
         if ((!$this->hasOption('force') ||
