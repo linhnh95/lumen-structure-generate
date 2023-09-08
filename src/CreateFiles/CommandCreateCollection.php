@@ -41,7 +41,7 @@ class CommandCreateCollection extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string $rootNamespace
+     * @param string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace): string
@@ -59,8 +59,7 @@ class CommandCreateCollection extends GeneratorCommand
         $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
         $nameBase = $this->qualifyClass($this->getNameInput());
         $nameInput = $this->getNameInput() . 'Collection';
-        $name = $this->qualifyClass($nameInput);
-        $namePath = $this->getDefaultNamespace($this->rootNamespace()) . DIRECTORY_SEPARATOR . $director['folder'] . DIRECTORY_SEPARATOR . $director['name'] . DIRECTORY_SEPARATOR . $name;
+        $namePath = $this->getDefaultNamespace($this->rootNamespace()) . DIRECTORY_SEPARATOR . $director['folder'] . DIRECTORY_SEPARATOR . $director['name'] . DIRECTORY_SEPARATOR . $director['name'] . 'Collection';
         $path = $this->getPath($namePath);
         if ((!$this->hasOption('force') ||
                 !$this->option('force')) &&
@@ -75,5 +74,11 @@ class CommandCreateCollection extends GeneratorCommand
             $this->files->put($path, $this->buildClass($nameBase));
         }
         $this->info($this->type . ' created successfully.');
+    }
+
+    protected function getNamespace($name): string
+    {
+        $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
+        return trim(implode('\\', array_slice(explode('\\', $name), 0, -1)), '\\') . DIRECTORY_SEPARATOR . $director['name'];
     }
 }

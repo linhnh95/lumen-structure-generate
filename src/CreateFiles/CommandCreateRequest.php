@@ -86,4 +86,10 @@ class CommandCreateRequest extends GeneratorCommand
         }
         $this->info($this->type . ' created successfully.');
     }
+
+    protected function getNamespace($name): string
+    {
+        $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
+        return trim(implode('\\', array_slice(explode('\\', $name), 0, -1)), '\\') . DIRECTORY_SEPARATOR . $director['name'];
+    }
 }
