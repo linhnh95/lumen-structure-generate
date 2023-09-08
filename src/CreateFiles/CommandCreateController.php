@@ -11,7 +11,7 @@ class CommandCreateController extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'lumen-generate:controller';
+    protected $name = 'lumen-generate:controller {name}';
 
     /**
      * The console command description.

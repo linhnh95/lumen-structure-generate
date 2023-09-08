@@ -11,7 +11,7 @@ class CommandCreateCollection extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'lumen-generate:resource-collection';
+    protected $name = 'lumen-generate:resource-collection {name}';
 
     /**
      * The console command description.

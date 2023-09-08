@@ -11,7 +11,7 @@ class CommandCreateRepository extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'lumen-generate:repository';
+    protected $name = 'lumen-generate:repository {name}';
 
     /**
      * The console command description.

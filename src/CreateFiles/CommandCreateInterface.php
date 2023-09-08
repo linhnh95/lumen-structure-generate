@@ -11,7 +11,7 @@ class CommandCreateInterface extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'lumen-generate:interface';
+    protected $name = 'lumen-generate:interface {name}';
 
     /**
      * The console command description.

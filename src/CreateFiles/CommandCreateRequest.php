@@ -11,7 +11,7 @@ class CommandCreateRequest extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'lumen-generate:request';
+    protected $name = 'lumen-generate:request {name}';
 
     /**
      * The console command description.
