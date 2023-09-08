@@ -61,6 +61,7 @@ class CommandCreateController extends GeneratorCommand
         $stub = parent::replaceClass($stub, $name);
         $stub = $this->replaceVariable($stub);
         $stub = $this->replaceFolder($stub);
+        $stub = $this->replaceVariableLower($stub);
         return $stub;
     }
 
@@ -112,5 +113,18 @@ class CommandCreateController extends GeneratorCommand
         $variable = str_replace($this->getNamespace($variable).'\\', '', $variable);
         $variable = ucfirst($variable);
         return str_replace('{{variable}}', $variable, $stub);
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return mixed
+     */
+    protected function replaceVariableLower($stub)
+    {
+        $variable = $this->qualifyClass($this->getNameInput());
+        $variable = str_replace($this->getNamespace($variable).'\\', '', $variable);
+        $variable = lcfirst($variable);
+        return str_replace('{{variable_low}}', $variable, $stub);
     }
 }

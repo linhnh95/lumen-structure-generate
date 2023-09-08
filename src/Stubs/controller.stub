@@ -12,10 +12,10 @@ use App\Http\Requests\{{folder}}\DummyClass\DeleteDummyClassRequest;
 
 class DummyClassController extends Controller
 {
-    public ${{variable}}Repository;
+    public ${{variable_low}}Repository;
 
-    public function __construct(DummyClassInterface ${{variable}}Repository){
-        $this->{{variable}}Repository = ${{variable}}Repository;
+    public function __construct(DummyClassInterface ${{variable_low}}Repository){
+        $this->{{variable_low}}Repository = ${{variable_low}}Repository;
     }
 
     public function get{{variable}}s(ListDummyClassRequest $request)
