@@ -66,9 +66,7 @@ class CommandCreateRequest extends GeneratorCommand
         ];
 
         foreach ($requests as $request) {
-            $name = $this->qualifyClass($request);
-            $nameInput = $director['folder'] . DIRECTORY_SEPARATOR . $name;
-            $nameBase = $this->qualifyClass($nameInput);
+            $nameInput = $this->qualifyClass($director['folder'] . DIRECTORY_SEPARATOR . $request);
             $path = $this->getPath($nameInput);
             if ((!$this->hasOption('force') ||
                     !$this->option('force')) &&
@@ -78,9 +76,9 @@ class CommandCreateRequest extends GeneratorCommand
             }
             $this->makeDirectory($path);
             if (method_exists($this, 'sortImports')) {
-                $this->files->put($path, $this->sortImports($this->buildClass($nameBase)));
+                $this->files->put($path, $this->sortImports($this->buildClass($nameInput)));
             } else {
-                $this->files->put($path, $this->buildClass($nameBase));
+                $this->files->put($path, $this->buildClass($nameInput));
             }
 
         }
