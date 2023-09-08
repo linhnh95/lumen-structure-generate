@@ -69,11 +69,10 @@ class CommandCreateController extends GeneratorCommand
      */
     public function handle()
     {
-        $folder = trim($this->argument('folder'));
         $nameBase = $this->qualifyClass($this->getNameInput());
         $nameInput = $this->getNameInput() . 'Controller';
         $name = $this->qualifyClass($nameInput);
-        $path = $this->getPath($folder . DIRECTORY_SEPARATOR . $name);
+        $path = $this->getPath($name);
         if ((!$this->hasOption('force') ||
                 !$this->option('force')) &&
             $this->alreadyExists($nameInput)) {
