@@ -1,0 +1,37 @@
+<?php
+
+namespace DummyNamespace;
+
+
+use App\Http\Requests\AbstractFormRequest;
+
+class DummyClass extends AbstractFormRequest
+{
+    /**
+     * @return bool
+     */
+    public function authenticate(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+
+        ];
+    }
+}

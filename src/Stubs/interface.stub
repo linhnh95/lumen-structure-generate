@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyNamespace;
+
+interface DummyClassInterface
+{
+    public function get{{variable}}s(array $params = []);
+
+    public function find{{variable}}ById(int $id);
+
+    public function create{{variable}}(array $create = []);
+
+    public function update{{variable}}(int $id, array $params = []);
+
+    public function delete{{variable}}(int $id, array $params = []);
+}

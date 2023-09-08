@@ -1,0 +1,37 @@
+{
+  "name": "linhnh95/laravel-lumen-generate",
+  "type": "library",
+  "description": "Library Support For Structure Laravel",
+  "keywords": ["laravel", "structure"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nguyen Hong Linh",
+      "email": "jd.linhnh95@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "laravel/lumen-framework": "^8",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-openssl": "*"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "Linhnh95\\LaravelLumenGenerate\\": "src/"
+    }
+  },
+  "autoload-dev": {},
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Linhnh95\\LaravelLumenGenerate\\LaravelLumenGenerateProvider"
+      ]
+    }
+  }
+}

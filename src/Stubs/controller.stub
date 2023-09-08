@@ -1,0 +1,46 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Abstraction\DummyClassInterface;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\DummyClass\CreateDummyClassRequest;
+use App\Http\Requests\DummyClass\ListDummyClassRequest;
+use App\Http\Requests\DummyClass\FindDummyClassRequest;
+use App\Http\Requests\DummyClass\UpdateDummyClassRequest;
+use App\Http\Requests\DummyClass\DeleteDummyClassRequest;
+
+class DummyClassController extends Controller
+{
+    public ${{variable}}Repository;
+
+    public function __construct(DummyClassInterface ${{variable}}Repository){
+        $this->{{variable}}Repository = ${{variable}}Repository;
+    }
+
+    public function get{{variable}}s(ListDummyClassRequest $request)
+    {
+        //
+    }
+
+    public function find{{variable}}(FindDummyClassRequest $request)
+    {
+        //
+    }
+
+    public function create{{variable}}(CreateDummyClassRequest $request)
+    {
+        //
+    }
+
+    public function update{{variable}}(UpdateDummyClassRequest $request, $id)
+    {
+        //
+    }
+
+    public function delete{{variable}}(DeleteDummyClassRequest $request, $id)
+    {
+        //
+    }
+}
