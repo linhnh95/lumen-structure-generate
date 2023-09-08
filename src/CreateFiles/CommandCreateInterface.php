@@ -96,7 +96,9 @@ class CommandCreateInterface extends GeneratorCommand
     protected function replaceVariable($stub)
     {
         $variable = $this->qualifyClass($this->getNameInput());
-        $variable = lcfirst($this->buildClass($variable));
+        $variable = $this->qualifyClass($this->getNameInput());
+        $variable = str_replace($this->getNamespace($variable).'\\', '', $variable);
+        $variable = lcfirst($variable);
         return str_replace('{{variable}}', $variable, $stub);
     }
 }
