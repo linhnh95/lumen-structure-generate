@@ -48,8 +48,8 @@ class CommandCreateFiles extends Command
         $this->callSilent('lumen-generate:repository', ['name' => $this->argument('name')]);
         $this->callSilent('lumen-generate:controller', ['name' => $this->argument('name')]);
         $this->callSilent('lumen-generate:resource-collection', ['name' => $this->argument('name')]);
-        $this->callSilent('lumen-generate:resource', ['name' => $this->argument('name')]);
-        $this->callSilent('lumen-generate:request', [['name' => $this->argument('name')]]);
+        $this->callSilent('lumen-generate:resource-item', ['name' => $this->argument('name')]);
+        $this->callSilent('lumen-generate:request', ['name' => $this->argument('name')]);
         $this->createProviders($director['name']);
         $this->info('Create files success');
     }
