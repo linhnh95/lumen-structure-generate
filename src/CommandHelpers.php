@@ -27,7 +27,7 @@ class CommandHelpers
         $name = array_pop($explode);
         $directory = implode(DIRECTORY_SEPARATOR, $explode);
         return [
-            'name' => $name,
+            'name' => $name ?? '',
             'folder' => $directory
         ];
     }

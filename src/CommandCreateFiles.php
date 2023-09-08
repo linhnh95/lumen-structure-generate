@@ -50,16 +50,18 @@ class CommandCreateFiles extends Command
         $this->callSilent('lumen-generate:resource-collection', ['name' => $this->argument('name')]);
         $this->callSilent('lumen-generate:resource-item', ['name' => $this->argument('name')]);
         $this->callSilent('lumen-generate:request', ['name' => $this->argument('name')]);
-        $this->createProviders($director['name']);
+        $this->createProviders($director['name'], $director['folder']);
         $this->info('Create files success');
     }
 
     /**
      * @param $name
+     * @param $folder
+     * @return void
      */
-    private function createProviders($name)
+    private function createProviders($name, $folder = '')
     {
-        $stringAddNew = '$this->app->bind(' . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Abstraction' . DIRECTORY_SEPARATOR . $name . 'Interface::class, ' . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Repositories' . DIRECTORY_SEPARATOR . $name . 'Repository::class);' . "\n" . '        ';
+        $stringAddNew = '$this->app->bind(' . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Abstraction' . ($folder && $folder !== '' ? DIRECTORY_SEPARATOR . $folder : '') . DIRECTORY_SEPARATOR . $name . 'Interface::class, ' . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Repositories'. ($folder && $folder !== '' ? DIRECTORY_SEPARATOR . $folder : '') . DIRECTORY_SEPARATOR . $name . 'Repository::class);' . "\n" . '        ';
         $file = $this->commandHelper->getAppPath() . '/Providers/RepositoryProvider.php';
         $contentFile = file_get_contents($file);
         $changeContent = substr($contentFile, strripos($contentFile, '/**BEGIN CONFIG**/'));
