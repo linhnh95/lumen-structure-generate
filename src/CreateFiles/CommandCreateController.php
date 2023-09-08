@@ -95,7 +95,7 @@ class CommandCreateController extends GeneratorCommand
      */
     protected function replaceVariable($stub)
     {
-        $variable = lcfirst($this->getNameInput());
+        $variable = lcfirst($this->qualifyClass($this->getNameInput()));
         return str_replace('{{variable}}', $variable, $stub);
     }
 }

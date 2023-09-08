@@ -24,9 +24,9 @@ class CommandHelpers
     /**
      * @return string
      */
-    public function getAppPath()
+    public function getAppPath($path = ''): string
     {
-        return app_path();
+        return app('path') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 
     /**

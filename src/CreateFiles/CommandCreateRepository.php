@@ -86,4 +86,15 @@ class CommandCreateRepository extends GeneratorCommand
         }
         $this->info($this->type . ' created successfully.');
     }
+
+    /**
+     * @param $stub
+     *
+     * @return mixed
+     */
+    protected function replaceVariable($stub)
+    {
+        $variable = lcfirst($this->qualifyClass($this->getNameInput()));
+        return str_replace('{{variable}}', $variable, $stub);
+    }
 }
