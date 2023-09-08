@@ -21,6 +21,17 @@ class CommandHelpers
         return base_path();
     }
 
+    public static function getDirectorAndFilename(string $name = ''): array
+    {
+        $explode = explode('/', $name);
+        $name = array_pop($explode);
+        $directory = implode(DIRECTORY_SEPARATOR, $explode);
+        return [
+            'name' => $name,
+            'folder' => $directory
+        ];
+    }
+
     /**
      * @return string
      */

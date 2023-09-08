@@ -3,6 +3,7 @@
 namespace Linhnh95\LaravelLumenGenerate\CreateFiles;
 
 use Illuminate\Console\GeneratorCommand;
+use Linhnh95\LaravelLumenGenerate\CommandHelpers;
 
 class CommandCreateRepository extends GeneratorCommand
 {
@@ -48,6 +49,7 @@ class CommandCreateRepository extends GeneratorCommand
     {
         $stub = parent::replaceClass($stub, $name);
         $stub = $this->replaceVariable($stub);
+        $stub = $this->replaceFolder($stub);
         return $stub;
     }
 
@@ -93,11 +95,22 @@ class CommandCreateRepository extends GeneratorCommand
      *
      * @return mixed
      */
+    protected function replaceFolder($stub)
+    {
+        $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
+        return str_replace('{{folder}}', ucfirst($director['folder']), $stub);
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return mixed
+     */
     protected function replaceVariable($stub)
     {
         $variable = $this->qualifyClass($this->getNameInput());
         $variable = str_replace($this->getNamespace($variable).'\\', '', $variable);
-        $variable = lcfirst($variable);
+        $variable = ucfirst($variable);
         return str_replace('{{variable}}', $variable, $stub);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace DummyNamespace;
 
+use App\Abstraction\{{folder}}\DummyClassInterface;
+
 class DummyClassRepository implements DummyClassInterface
 {
     public function get{{variable}}s(array $params = [])

@@ -3,6 +3,7 @@
 namespace Linhnh95\LaravelLumenGenerate\CreateFiles;
 
 use Illuminate\Console\GeneratorCommand;
+use Linhnh95\LaravelLumenGenerate\CommandHelpers;
 
 class CommandCreateRequest extends GeneratorCommand
 {
@@ -55,7 +56,7 @@ class CommandCreateRequest extends GeneratorCommand
      */
     public function handle()
     {
-        $director = $this->getDirectorAndFilename($this->getNameInput());
+        $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
 
         $requests = [
             'Create' . $director['name'] . 'Request',
@@ -67,7 +68,7 @@ class CommandCreateRequest extends GeneratorCommand
 
         foreach ($requests as $request) {
             $nameInput = $this->qualifyClass($director['folder'] . DIRECTORY_SEPARATOR . $request);
-            $path = $this->getPath($nameInput);
+            $path = $this->getPath($nameInput. DIRECTORY_SEPARATOR . $director['name']);
             if ((!$this->hasOption('force') ||
                     !$this->option('force')) &&
                 $this->alreadyExists($request)) {
@@ -83,20 +84,5 @@ class CommandCreateRequest extends GeneratorCommand
 
         }
         $this->info($this->type . ' created successfully.');
-    }
-
-    /**
-     * @param string $name
-     * @return array
-     */
-    private function getDirectorAndFilename(string $name = ''): array
-    {
-        $explode = explode('/', $name);
-        $name = array_pop($explode);
-        $directory = implode(DIRECTORY_SEPARATOR, $explode);
-        return [
-            'name' => $name,
-            'folder' => $directory
-        ];
     }
 }

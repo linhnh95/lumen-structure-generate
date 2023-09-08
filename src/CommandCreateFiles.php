@@ -43,7 +43,7 @@ class CommandCreateFiles extends Command
      */
     public function handle()
     {
-        $director = $this->getDirectorAndFilename($this->argument('name'));
+        $director = CommandHelpers::getDirectorAndFilename($this->argument('name'));
         $this->callSilent('lumen-generate:interface', ['name' => $this->argument('name')]);
         $this->callSilent('lumen-generate:repository', ['name' => $this->argument('name')]);
         $this->callSilent('lumen-generate:controller', ['name' => $this->argument('name')]);
@@ -68,20 +68,5 @@ class CommandCreateFiles extends Command
         $afterString = str_replace($changeContent, $stringReplace, $contentFile);
         file_put_contents($file, '');
         file_put_contents($file, $afterString);
-    }
-
-    /**
-     * @param string $name
-     * @return array
-     */
-    private function getDirectorAndFilename(string $name = ''): array
-    {
-        $explode = explode('/', $name);
-        $name = array_pop($explode);
-        $directory = implode(DIRECTORY_SEPARATOR, $explode);
-        return [
-            'name' => $name,
-            'folder' => $directory
-        ];
     }
 }

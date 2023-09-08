@@ -3,6 +3,7 @@
 namespace Linhnh95\LaravelLumenGenerate\CreateFiles;
 
 use Illuminate\Console\GeneratorCommand;
+use Linhnh95\LaravelLumenGenerate\CommandHelpers;
 
 class CommandCreateCollection extends GeneratorCommand
 {
@@ -55,10 +56,11 @@ class CommandCreateCollection extends GeneratorCommand
      */
     public function handle()
     {
+        $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
         $nameBase = $this->qualifyClass($this->getNameInput());
         $nameInput = $this->getNameInput() . 'Collection';
         $name = $this->qualifyClass($nameInput);
-        $path = $this->getPath($name);
+        $path = $this->getPath($name. DIRECTORY_SEPARATOR . $director['name']);
         if ((!$this->hasOption('force') ||
                 !$this->option('force')) &&
             $this->alreadyExists($nameInput)) {

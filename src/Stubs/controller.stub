@@ -2,14 +2,14 @@
 
 namespace DummyNamespace;
 
-use App\Abstraction\DummyClassInterface;
+use App\Abstraction\{{folder}}\DummyClassInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DummyClass\CreateDummyClassRequest;
-use App\Http\Requests\DummyClass\ListDummyClassRequest;
-use App\Http\Requests\DummyClass\FindDummyClassRequest;
-use App\Http\Requests\DummyClass\UpdateDummyClassRequest;
-use App\Http\Requests\DummyClass\DeleteDummyClassRequest;
+use App\Http\Requests\{{folder}}\DummyClass\CreateDummyClassRequest;
+use App\Http\Requests\{{folder}}\DummyClass\ListDummyClassRequest;
+use App\Http\Requests\{{folder}}\DummyClass\FindDummyClassRequest;
+use App\Http\Requests\{{folder}}\DummyClass\UpdateDummyClassRequest;
+use App\Http\Requests\{{folder}}\DummyClass\DeleteDummyClassRequest;
 
 class DummyClassController extends Controller
 {
