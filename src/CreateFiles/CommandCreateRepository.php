@@ -47,6 +47,7 @@ class CommandCreateRepository extends GeneratorCommand
     protected function replaceClass($stub, $name): string
     {
         $stub = parent::replaceClass($stub, $name);
+        $stub = $this->replaceVariable($stub);
         return $stub;
     }
 
@@ -94,7 +95,8 @@ class CommandCreateRepository extends GeneratorCommand
      */
     protected function replaceVariable($stub)
     {
-        $variable = lcfirst($this->qualifyClass($this->getNameInput()));
+        $variable = $this->qualifyClass($this->getNameInput());
+        $variable = lcfirst($this->buildClass($variable));
         return str_replace('{{variable}}', $variable, $stub);
     }
 }

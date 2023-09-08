@@ -75,13 +75,28 @@ class CommandCreateInterface extends GeneratorCommand
     }
 
     /**
+     * Replace the class name for the given stub.
+     *
+     * @param  string $stub
+     * @param  string $name
+     * @return string
+     */
+    protected function replaceClass($stub, $name): string
+    {
+        $stub = parent::replaceClass($stub, $name);
+        $stub = $this->replaceVariable($stub);
+        return $stub;
+    }
+
+    /**
      * @param $stub
      *
      * @return mixed
      */
     protected function replaceVariable($stub)
     {
-        $variable = lcfirst($this->qualifyClass($this->getNameInput()));
+        $variable = $this->qualifyClass($this->getNameInput());
+        $variable = lcfirst($this->buildClass($variable));
         return str_replace('{{variable}}', $variable, $stub);
     }
 }
