@@ -76,6 +76,14 @@ class CommandCreateResource extends GeneratorCommand
         $this->info($this->type . ' created successfully.');
     }
 
+    protected function replaceClass($stub, $name)
+    {
+        $namespace = trim(implode('\\', array_slice(explode('\\', $name), 0, -1)), '\\');
+        $class = str_replace($namespace . '\\', '', $name);
+
+        return str_replace(['DummyClass', '{{ class }}', '{{class}}'], $class, $stub);
+    }
+
     protected function getNamespace($name): string
     {
         $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());

@@ -3,7 +3,6 @@
 namespace DummyNamespace;
 
 use App\Abstraction\{{folder}}\DummyClassInterface;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\{{folder}}\DummyClass\CreateDummyClassRequest;
 use App\Http\Requests\{{folder}}\DummyClass\ListDummyClassRequest;
