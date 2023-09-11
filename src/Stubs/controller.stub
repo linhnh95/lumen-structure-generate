@@ -9,37 +9,74 @@ use App\Http\Requests\{{folder}}\DummyClass\ListDummyClassRequest;
 use App\Http\Requests\{{folder}}\DummyClass\FindDummyClassRequest;
 use App\Http\Requests\{{folder}}\DummyClass\UpdateDummyClassRequest;
 use App\Http\Requests\{{folder}}\DummyClass\DeleteDummyClassRequest;
+use App\Http\Resources\{{folder}}\DummyClass\DummyClassCollection;
+use App\Http\Resources\{{folder}}\DummyClass\DummyClassResource;
+use App\Traits\ResponseAPI;
+use Illuminate\Http\JsonResponse;
 
 class DummyClassController extends Controller
 {
-    public ${{variable_low}}Repository;
+    use ResponseAPI;
+
+    public DummyClassInterface ${{variable_low}}Repository;
 
     public function __construct(DummyClassInterface ${{variable_low}}Repository){
         $this->{{variable_low}}Repository = ${{variable_low}}Repository;
     }
 
-    public function get{{variable}}s(ListDummyClassRequest $request)
+    /**
+     * @throws \Exception
+     */
+    public function get{{variable}}s(ListDummyClassRequest $request): JsonResponse
     {
-        //
+        $params = $request->validated();
+        ${{variable_low}}s = $this->{{variable_low}}Repository->get{{variable}}Pagination($params);
+        return $this->success([
+            '{{variable_low}}s' => new DummyClassCollection(${{variable_low}}s->items()),
+            'meta' => $this->buildMeta(${{variable_low}}s)
+        ], 'Lấy danh sách thành công');
     }
 
-    public function find{{variable}}(FindDummyClassRequest $request)
+    /**
+     * @throws \Exception
+     */
+    public function find{{variable}}(FindDummyClassRequest $request): JsonResponse
     {
-        //
+        $params = $request->validated();
+        ${{variable_low}} = $this->{{variable_low}}Repository->get{{variable}}ById($id, $params);
+        if(!${{variable_low}}){
+            return $this->error('Không tìm thấy dữ liệu');
+        }
+        return $this->success(new DummyClassResource(${{variable_low}}), 'Lấy dữ liệu thành công');
     }
 
-    public function create{{variable}}(CreateDummyClassRequest $request)
+    /**
+     * @throws \Exception
+     */
+    public function create{{variable}}(CreateDummyClassRequest $request): JsonResponse
     {
-        //
+        $params = $request->validated();
+        ${{variable_low}} = $this->{{variable_low}}Repository->create{{variable}}($params);
+        return $this->success(new DummyClassResource(${{variable_low}}), 'Tạo dữ liệu thành công');
     }
 
-    public function update{{variable}}(UpdateDummyClassRequest $request, $id)
+    /**
+     * @throws \Exception
+     */
+    public function update{{variable}}(UpdateDummyClassRequest $request, $id): JsonResponse
     {
-        //
+        $params = $request->validated();
+        ${{variable_low}} = $this->{{variable_low}}Repository->update{{variable}}($id, $params);
+        return $this->success(new DummyClassResource(${{variable_low}}), 'Cập nhật dữ liệu thành công');
     }
 
-    public function delete{{variable}}(DeleteDummyClassRequest $request, $id)
+    /**
+     * @throws \Exception
+     */
+    public function delete{{variable}}(DeleteDummyClassRequest $request, $id): JsonResponse
     {
-        //
+        $params = $request->validated();
+        $this->{{variable_low}}Repository->delete{{variable}}ById($id);
+        return $this->success([], 'Xoá dữ liệu thành công');
     }
 }
