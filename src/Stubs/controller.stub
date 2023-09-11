@@ -40,10 +40,10 @@ class DummyClassController extends Controller
     /**
      * @throws \Exception
      */
-    public function find{{variable}}(FindDummyClassRequest $request): JsonResponse
+    public function find{{variable}}(FindDummyClassRequest $request, $id): JsonResponse
     {
-        $params = $request->validated();
-        ${{variable_low}} = $this->{{variable_low}}Repository->get{{variable}}ById($id, $params);
+        $request->validated();
+        ${{variable_low}} = $this->{{variable_low}}Repository->get{{variable}}ById($id);
         if(!${{variable_low}}){
             return $this->error('Không tìm thấy dữ liệu');
         }
@@ -75,7 +75,7 @@ class DummyClassController extends Controller
      */
     public function delete{{variable}}(DeleteDummyClassRequest $request, $id): JsonResponse
     {
-        $params = $request->validated();
+        $request->validated();
         $this->{{variable_low}}Repository->delete{{variable}}ById($id);
         return $this->success([], 'Xoá dữ liệu thành công');
     }
