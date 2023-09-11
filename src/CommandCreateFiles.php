@@ -71,7 +71,7 @@ class CommandCreateFiles extends Command
         $afterString = str_replace($changeContent, $stringReplace, $contentFile);
 
 
-        $stringUse = 'App\Abstraction' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Interface;' . "\n" . 'App\Repositories' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Repository;' . "\n";
+        $stringUse = 'use App\Abstraction' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Interface;' . "\n" . 'use App\Repositories' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Repository;' . "\n";
         $changeContentUse = substr($afterString, strripos($afterString, '/**BEGIN CONFIG USE**/'));
         $changeContentUse = substr($changeContentUse, 0, strripos($changeContentUse, '/**END CONFIG USE**/'));
         $stringReplaceUse = $changeContentUse . $stringUse;
