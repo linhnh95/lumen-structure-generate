@@ -40,13 +40,13 @@ class DummyClassRepository extends ARepository implements DummyClassInterface
         return $query->first();
     }
 
-    public function create{{variable}}(array $create = [])
+    public function create{{variable}}(array $create = []): Model
     {
         ${{variable_low}} = new DummyClass;
         return $this->updateModel(${{variable_low}}, $create);
     }
 
-    public function update{{variable}}(int $id, array $params = [])
+    public function update{{variable}}(int $id, array $params = []): Model
     {
         $query = $this->model->newQuery();
         ${{variable_low}} = $query->find($id);

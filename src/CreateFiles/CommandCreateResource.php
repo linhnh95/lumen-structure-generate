@@ -87,6 +87,6 @@ class CommandCreateResource extends GeneratorCommand
     protected function getNamespace($name): string
     {
         $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
-        return trim(implode('\\', array_slice(explode('\\', $name), 0, -1)), '\\') . DIRECTORY_SEPARATOR . $director['name'];
+        return trim(implode('\\', array_slice(explode('\\', $name), 0, -1)), '\\') . '\\' . $director['name'];
     }
 }

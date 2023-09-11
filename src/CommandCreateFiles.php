@@ -56,19 +56,27 @@ class CommandCreateFiles extends Command
 
     /**
      * @param $name
-     * @param $folder
+     * @param string $folder
      * @return void
      */
-    private function createProviders($name, $folder = '')
+    private function createProviders($name, string $folder = '')
     {
-        $stringAddNew = '$this->app->bind(' . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Abstraction' . ($folder && $folder !== '' ? DIRECTORY_SEPARATOR . $folder : '') . DIRECTORY_SEPARATOR . $name . 'Interface::class, ' . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Repositories'. ($folder && $folder !== '' ? DIRECTORY_SEPARATOR . $folder : '') . DIRECTORY_SEPARATOR . $name . 'Repository::class);' . "\n" . '        ';
+        $stringAddNew = '$this->app->bind(' . $name . 'Interface::class,' . "\n" . '            ' . $name . 'Repository::class);' . "\n" . '        ';
         $file = $this->commandHelper->getAppPath() . '/Providers/RepositoryProvider.php';
         $contentFile = file_get_contents($file);
         $changeContent = substr($contentFile, strripos($contentFile, '/**BEGIN CONFIG**/'));
         $changeContent = substr($changeContent, 0, strripos($changeContent, '/**END CONFIG**/'));
         $stringReplace = $changeContent . $stringAddNew;
         $afterString = str_replace($changeContent, $stringReplace, $contentFile);
+
+
+        $stringUse = 'App\Abstraction' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Interface;' . "\n" . 'App\Repositories' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Repository;';
+        $changeContentUse = substr($afterString, strripos($afterString, '/**BEGIN CONFIG USE**/'));
+        $changeContentUse = substr($changeContentUse, 0, strripos($changeContentUse, '/**END CONFIG USE**/'));
+        $stringReplaceUse = $changeContentUse . $stringUse;
+        $afterStringUse = str_replace($changeContentUse, $stringReplaceUse, $contentFile);
+
         file_put_contents($file, '');
-        file_put_contents($file, $afterString);
+        file_put_contents($file, $afterStringUse);
     }
 }
