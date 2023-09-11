@@ -61,20 +61,21 @@ class CommandCreateFiles extends Command
      */
     private function createProviders($name, string $folder = '')
     {
-        $stringAddNew = '$this->app->bind(' . $name . 'Interface::class,' . "\n" . '            ' . $name . 'Repository::class);' . "\n" . '        ';
         $file = $this->commandHelper->getAppPath() . '/Providers/RepositoryProvider.php';
         $contentFile = file_get_contents($file);
+
+        $stringAddNew = '$this->app->bind(' . $name . 'Interface::class,' . "\n" . '            ' . $name . 'Repository::class);' . "\n" . '        ';
         $changeContent = substr($contentFile, strripos($contentFile, '/**BEGIN CONFIG**/'));
         $changeContent = substr($changeContent, 0, strripos($changeContent, '/**END CONFIG**/'));
         $stringReplace = $changeContent . $stringAddNew;
         $afterString = str_replace($changeContent, $stringReplace, $contentFile);
 
 
-        $stringUse = 'App\Abstraction' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Interface;' . "\n" . 'App\Repositories' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Repository;';
+        $stringUse = 'App\Abstraction' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Interface;' . "\n" . 'App\Repositories' . ($folder && $folder !== '' ? '\\' . $folder : '') . '\\' . $name . 'Repository;' . "\n";
         $changeContentUse = substr($afterString, strripos($afterString, '/**BEGIN CONFIG USE**/'));
         $changeContentUse = substr($changeContentUse, 0, strripos($changeContentUse, '/**END CONFIG USE**/'));
         $stringReplaceUse = $changeContentUse . $stringUse;
-        $afterStringUse = str_replace($changeContentUse, $stringReplaceUse, $contentFile);
+        $afterStringUse = str_replace($changeContentUse, $stringReplaceUse, $afterString);
 
         file_put_contents($file, '');
         file_put_contents($file, $afterStringUse);
