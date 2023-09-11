@@ -3,36 +3,74 @@
 namespace DummyNamespace;
 
 use App\Abstraction\{{folder}}\DummyClassInterface;
+use App\Repositories\ARepository;
+use \Illuminate\Pagination\LengthAwarePaginator;
+use \Illuminate\Database\Eloquent\Model;
 
-class DummyClassRepository implements DummyClassInterface
+class DummyClassRepository extends ARepository implements DummyClassInterface
 {
-    public function get{{variable}}s(array $params = [])
-    {
 
+    public function __construct(DummyClass ${{variable_low}})
+    {
+        parent::__construct(${{variable_low}});
     }
 
-    public function get{{variable}}Pagination(array $params = [])
-    {
 
+    public function get{{variable}}s(array $params = [])
+    {
+        $query = $this->generateQuery($params);
+        return $query->get();
+    }
+
+    public function get{{variable}}Pagination(array $params = []) : LengthAwarePaginator
+    {
+        $query = $this->generateQuery($params);
+        return $query->paginate($params['per_page'] ?? 20);
     }
 
     public function find{{variable}}ById(int $id)
     {
+        $query = $this->model->newQuery();
+        return $query->find($id);
+    }
 
+    public function find{{variable}}ByParams(array $params = [])
+    {
+        $query = $this->generateQuery($params);
+        return $query->first();
     }
 
     public function create{{variable}}(array $create = [])
     {
-
+        ${{variable_low}} = new DummyClass;
+        return $this->updateModel(${{variable_low}}, $create);
     }
 
     public function update{{variable}}(int $id, array $params = [])
     {
-
+        $query = $this->model->newQuery();
+        ${{variable_low}} = $query->find($id);
+        return $this->updateModel(${{variable_low}}, $params);
     }
 
-    public function delete{{variable}}(int $id, array $params = [])
+    public function updateProductByQuery(array $query = [], array $params = []): Model
     {
+        $query = $this->generateQuery($query);
+        ${{variable_low}} = $query->first();
+        return $this->updateModel(${{variable_low}}, $params);
+    }
 
+    public function delete{{variable}}ById(int $id)
+    {
+        $query = $this->model->newQuery();
+        ${{variable_low}} = $query->find($id);
+        ${{variable_low}}->delete();
+    }
+
+    public function delete{{variable}}ByParams(array $params = [])
+    {
+        $query = $this->generateQuery($params);
+        ${{variable_low}} = $query->first();
+        ${{variable_low}}->delete();
     }
 }

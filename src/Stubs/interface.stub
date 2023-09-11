@@ -10,9 +10,15 @@ interface DummyClassInterface
 
     public function find{{variable}}ById(int $id);
 
+    public function find{{variable}}ByParams(array $params = []);
+
     public function create{{variable}}(array $create = []);
 
     public function update{{variable}}(int $id, array $params = []);
 
-    public function delete{{variable}}(int $id, array $params = []);
+    public function updateProductByQuery(array $query = [], array $params = []);
+
+    public function delete{{variable}}ById(int $id);
+
+    public function delete{{variable}}ByParams(array $params = []);
 }

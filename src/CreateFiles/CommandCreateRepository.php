@@ -50,6 +50,7 @@ class CommandCreateRepository extends GeneratorCommand
         $stub = parent::replaceClass($stub, $name);
         $stub = $this->replaceVariable($stub);
         $stub = $this->replaceFolder($stub);
+        $stub = $this->replaceVariableLower($stub);
         return $stub;
     }
 
@@ -99,6 +100,19 @@ class CommandCreateRepository extends GeneratorCommand
     {
         $director = CommandHelpers::getDirectorAndFilename($this->getNameInput());
         return str_replace('{{folder}}', ucfirst($director['folder']), $stub);
+    }
+
+    /**
+     * @param $stub
+     *
+     * @return mixed
+     */
+    protected function replaceVariableLower($stub)
+    {
+        $variable = $this->qualifyClass($this->getNameInput());
+        $variable = str_replace($this->getNamespace($variable).'\\', '', $variable);
+        $variable = lcfirst($variable);
+        return str_replace('{{variable_low}}', $variable, $stub);
     }
 
     /**
