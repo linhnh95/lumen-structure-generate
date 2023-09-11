@@ -43,7 +43,7 @@ class DummyClassController extends Controller
     public function find{{variable}}(FindDummyClassRequest $request, $id): JsonResponse
     {
         $request->validated();
-        ${{variable_low}} = $this->{{variable_low}}Repository->get{{variable}}ById($id);
+        ${{variable_low}} = $this->{{variable_low}}Repository->find{{variable}}ById($id);
         if(!${{variable_low}}){
             return $this->error('Không tìm thấy dữ liệu');
         }
