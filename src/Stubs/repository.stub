@@ -15,16 +15,15 @@ class DummyClassRepository extends ARepository implements DummyClassInterface
         parent::__construct(${{variable_low}});
     }
 
-
     public function get{{variable}}s(array $params = [])
     {
-        $query = $this->generateQuery($params);
+        $query = $this->generateQuery($this->parseParams($params));
         return $query->get();
     }
 
     public function get{{variable}}Pagination(array $params = []) : LengthAwarePaginator
     {
-        $query = $this->generateQuery($params);
+        $query = $this->generateQuery($this->parseParams($params));
         return $query->paginate($params['per_page'] ?? 20);
     }
 
@@ -36,7 +35,7 @@ class DummyClassRepository extends ARepository implements DummyClassInterface
 
     public function find{{variable}}ByParams(array $params = [])
     {
-        $query = $this->generateQuery($params);
+        $query = $this->generateQuery($this->parseParams($params));
         return $query->first();
     }
 
@@ -55,7 +54,7 @@ class DummyClassRepository extends ARepository implements DummyClassInterface
 
     public function updateProductByQuery(array $query = [], array $params = []): Model
     {
-        $query = $this->generateQuery($query);
+        $query = $this->generateQuery($this->parseParams($query));
         ${{variable_low}} = $query->first();
         return $this->updateModel(${{variable_low}}, $params);
     }
@@ -69,7 +68,7 @@ class DummyClassRepository extends ARepository implements DummyClassInterface
 
     public function delete{{variable}}ByParams(array $params = [])
     {
-        $query = $this->generateQuery($params);
+        $query = $this->generateQuery($this->parseParams($params));
         ${{variable_low}} = $query->first();
         ${{variable_low}}->delete();
     }
