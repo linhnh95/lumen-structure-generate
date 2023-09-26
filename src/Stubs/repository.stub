@@ -15,27 +15,31 @@ class DummyClassRepository extends ARepository implements DummyClassInterface
         parent::__construct(${{variable_low}});
     }
 
-    public function get{{variable}}s(array $params = [])
+    public function get{{variable}}s(array $params = [], array $relations = [])
     {
         $query = $this->generateQuery($this->parseParams($params));
+        $query = $query->with($relations);
         return $query->get();
     }
 
-    public function get{{variable}}Pagination(array $params = []) : LengthAwarePaginator
+    public function get{{variable}}Pagination(array $params = [], array $relations = []) : LengthAwarePaginator
     {
         $query = $this->generateQuery($this->parseParams($params));
+        $query = $query->with($relations);
         return $query->paginate($params['per_page'] ?? 20);
     }
 
-    public function find{{variable}}ById(int $id)
+    public function find{{variable}}ById(int $id, array $relations = [])
     {
         $query = $this->model->newQuery();
+        $query = $query->with($relations);
         return $query->find($id);
     }
 
-    public function find{{variable}}ByParams(array $params = [])
+    public function find{{variable}}ByParams(array $params = [], array $relations = [])
     {
         $query = $this->generateQuery($this->parseParams($params));
+        $query = $query->with($relations);
         return $query->first();
     }
 

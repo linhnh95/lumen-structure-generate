@@ -4,13 +4,13 @@ namespace DummyNamespace;
 
 interface DummyClassInterface
 {
-    public function get{{variable}}s(array $params = []);
+    public function get{{variable}}s(array $params = [], array $relations = []);
 
-    public function get{{variable}}Pagination(array $params = []);
+    public function get{{variable}}Pagination(array $params = [], array $relations = []);
 
-    public function find{{variable}}ById(int $id);
+    public function find{{variable}}ById(int $id, array $relations = []);
 
-    public function find{{variable}}ByParams(array $params = []);
+    public function find{{variable}}ByParams(array $params = [], array $relations = []);
 
     public function create{{variable}}(array $create = []);
 
